@@ -4,10 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Login from './Login';
+import CreateAccount from './CreateAccount';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Login />
+    <CreateAccount />
   </React.StrictMode>,
   document.getElementById('root')
 );
