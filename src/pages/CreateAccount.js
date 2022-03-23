@@ -3,17 +3,33 @@ import { Box } from "@mui/material";
 import { Typography } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
+import axios from "axios";
 
 export default function CreateAccount() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            username: data.get('username'),
-            password: data.get('password')
-        });
+        console.log(event.currentTarget.username.value);
+        console.log("----------------------------");
+        const data = {
+            email: event.currentTarget.email.value,
+            username: event.currentTarget.username.value,
+            password: event.currentTarget.password.value
+        }
+        const jsonData = JSON.stringify(data);
+        console.log(jsonData);
+        console.log(data);
+        //const data = new FormData(event.currentTarget);
+        // console.log({
+        //     email: data.get('email'),
+        //     username: data.get('username'),
+        //     password: data.get('password')
+        // });
+
+        axios.post(`http://localhost:8080/api/createAccount`, data)
+        .then(function (response) {
+            console.log(response);
+          })
     }
 
     return (
