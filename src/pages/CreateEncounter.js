@@ -1,20 +1,16 @@
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-export default function CreateCharacter() {
+export default function CreateEncounter() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
         const data = {
             name: event.currentTarget.name.value,
-            initiativeMod: event.currentTarget.initiativeMod.value,
-            armorClass: event.currentTarget.armorClass.value
         }
         
-        axios.post(`http://localhost:8080/api/createdCharacter/create`, data)
-        .then(function(response) {
-            console.log(response)
-        })
+        axios.post(`http://localhost:8080/api/encounter/create`, data)
     }
 
     return (
@@ -28,7 +24,7 @@ export default function CreateCharacter() {
                 }}
             >
                 <Typography component="h1" variant = "h5">
-                    Create A Character
+                    Create An Encounter
                 </Typography>
             </Box>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -42,33 +38,23 @@ export default function CreateCharacter() {
                     type="text"
                     autoFocus
                 />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="initiativeMod"
-                    label="Initiative Modifier"
-                    name="initiativeMod"
-                    type="number"
-                    
-                />
-                <TextField
-                    margin="normal"
-                    fullWidth
-                    id="armorClass"
-                    label="Armor Class"
-                    name="armorClass"
-                    type="number"
-                    min = "0"
-                />
                 <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2}}
                 >
-                    Create Character
+                    Create Encounter
                 </Button>
+                <Link to="/"> 
+                    <Button
+                        fullWidth
+                        varient="contained"
+                        sx={{ mt: 3, mb: 2}}
+                    >
+                        Return to Encounters
+                    </Button>
+                </Link>
             </Box>
         </Container>
     )
