@@ -14,32 +14,32 @@ export default function EncounterList() {
             setEncounters(fetchedEncounters);
         }
         retrieveEncounters();
-    }, [])
+    }, [encounters])
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const encounter = {
             name: event.currentTarget.name.value,
         }
-        const created = createEncounter(encounter);
-        created ? window.location.reload(true) : alert("Encounter could not be created")
+        const created = await createEncounter(encounter);
+        encounters.push(created)
+
     }
 
-    const handleDelete = (encounter) => {
+    const handleDelete = async (encounter) => {
         const confirmed = window.confirm(`Are you sure you want to delete ${encounter.name}?`);
         if (confirmed) {
-            const deleted = deleteEncounter(encounter)
-            console.log(deleted)
-            deleted ? window.location.reload(true) : alert("Encounter could not be deleted");
+            const deleted = await deleteEncounter(encounter)
+            deleted ? delete encounters[encounters.indexOf(encounter)] : alert("Encounter could not be deleted")
         }
     }
 
     const listEncounters = encounters.map((encounter) =>
-        <ListItem key={encounter.id.toString()} disablePadding> 
+        <ListItem key={encounter.id.toString()}> 
             <ListItemButton>
                 {encounter.name}
             </ListItemButton>
-            <Button onClick={() => handleDelete(encounter)} variant="contained"> 
+            <Button onClick={() => handleDelete(encounter)} color="error" variant="contained"> 
                 DELETE
             </Button>
         </ListItem>
@@ -61,7 +61,7 @@ export default function EncounterList() {
             </Box>
             <List>
                 {listEncounters}
-                <ListItem component="form" onSubmit={handleSubmit} disablePadding> 
+                <ListItem component="form" onSubmit={handleSubmit} > 
                 <TextField
                     size="small"
                     margin="normal"
