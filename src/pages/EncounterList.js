@@ -1,7 +1,9 @@
 import { Container, Box, Typography, List,
 ListItem, ListItemButton, Button, 
-TextField} from "@mui/material";
+TextField } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useNavigate  } from "react-router-dom";
+
 import fetchEncounters from "../utilities/fetchEncounters";
 import deleteEncounter from "../utilities/deleteEncounter";
 import createEncounter from "../utilities/createEncounter";
@@ -34,9 +36,15 @@ export default function EncounterList() {
         }
     }
 
+    let navigate=useNavigate();
+    const handleRedirect = (encounter) => {
+        console.log(`I clicked ${encounter.name}`)
+        navigate('/Encounter', {state: encounter})
+    }
+
     const listEncounters = encounters.map((encounter) =>
         <ListItem key={encounter.id.toString()}> 
-            <ListItemButton>
+            <ListItemButton onClick={() => handleRedirect(encounter)}>
                 {encounter.name}
             </ListItemButton>
             <Button onClick={() => handleDelete(encounter)} color="error" variant="contained"> 
@@ -55,7 +63,7 @@ export default function EncounterList() {
                     alignItems: 'center',
                 }}
             >
-                <Typography component="h1" varient = "h5">
+                <Typography component="h1">
                     Encounters
                 </Typography>
             </Box>
