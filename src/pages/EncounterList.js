@@ -1,6 +1,4 @@
-import { Container, Box, Typography, List,
-ListItem, ListItemButton, Button, 
-TextField } from "@mui/material";
+import { Container, Box, Typography, List, ListItem, ListItemButton, Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate  } from "react-router-dom";
 
@@ -16,7 +14,7 @@ export default function EncounterList() {
             setEncounters(fetchedEncounters);
         }
         retrieveEncounters();
-    }, [encounters])
+    }, [])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -24,7 +22,7 @@ export default function EncounterList() {
             name: event.currentTarget.name.value,
         }
         const created = await createEncounter(encounter);
-        encounters.push(created)
+        setEncounters([...encounters, created])
 
     }
 
@@ -32,13 +30,12 @@ export default function EncounterList() {
         const confirmed = window.confirm(`Are you sure you want to delete ${encounter.name}?`);
         if (confirmed) {
             const deleted = await deleteEncounter(encounter)
-            deleted ? delete encounters[encounters.indexOf(encounter)] : alert("Encounter could not be deleted")
+            deleted ? setEncounters(encounters.filter((e) => e.id !== encounter.id)) : alert("Encounter could not be deleted")
         }
     }
 
-    let navigate=useNavigate();
+    let navigate = useNavigate();
     const handleRedirect = (encounter) => {
-        console.log(`I clicked ${encounter.name}`)
         navigate('/Encounter', {state: encounter})
     }
 

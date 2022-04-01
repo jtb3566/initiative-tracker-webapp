@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom';
 export default function Encounter() {
     const { state } = useLocation();
     const[encounter, setEncounter] = useState(state)
-    console.log(encounter);
     return (
         <Container component = "main" maxWidth="sm">
             <Box
