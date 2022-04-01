@@ -16,6 +16,8 @@ export default function CreateAccount() {
             username: event.currentTarget.username.value,
             password: event.currentTarget.password.value
         }
+        
+        fetchAccountByEmail(event.currentTarget.email.value)
 
         axios.post(`http://localhost:8080/api/createAccount`, data)
         .then(function (response) {

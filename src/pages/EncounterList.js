@@ -1,9 +1,10 @@
 import { Container, Box, Typography, List,
-ListItem, ListItemButton, Button} from "@mui/material";
+ListItem, ListItemButton, Button, 
+TextField} from "@mui/material";
 import { useEffect, useState } from "react";
 import fetchEncounters from "../utilities/fetchEncounters";
-import {Link } from "react-router-dom"
 import deleteEncounter from "../utilities/deleteEncounter";
+import createEncounter from "../utilities/createEncounter";
 
 export default function EncounterList() {
     const [encounters, setEncounters] = useState([]) 
@@ -15,10 +16,21 @@ export default function EncounterList() {
         retrieveEncounters();
     }, [])
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const encounter = {
+            name: event.currentTarget.name.value,
+        }
+        const created = createEncounter(encounter);
+        created ? window.location.reload(true) : alert("Encounter could not be created")
+    }
+
     const handleDelete = (encounter) => {
         const confirmed = window.confirm(`Are you sure you want to delete ${encounter.name}?`);
         if (confirmed) {
-            deleteEncounter(encounter)
+            const deleted = deleteEncounter(encounter)
+            console.log(deleted)
+            deleted ? window.location.reload(true) : alert("Encounter could not be deleted");
         }
     }
 
@@ -27,14 +39,14 @@ export default function EncounterList() {
             <ListItemButton>
                 {encounter.name}
             </ListItemButton>
-            <ListItemButton onClick={() => handleDelete(encounter)}> 
+            <Button onClick={() => handleDelete(encounter)} variant="contained"> 
                 DELETE
-            </ListItemButton>
+            </Button>
         </ListItem>
         );
     
     return (
-        <Container component = "main" maxWidth="xs">
+        <Container component = "main" maxWidth="sm">
             <Box
             sx={{
                     marginTop: 8,
@@ -49,15 +61,25 @@ export default function EncounterList() {
             </Box>
             <List>
                 {listEncounters}
-            </List>
-            <Link to="/createEncounter">
+                <ListItem component="form" onSubmit={handleSubmit} disablePadding> 
+                <TextField
+                    size="small"
+                    margin="normal"
+                    required
+                    id="name"
+                    label="Name"
+                    name="name"
+                    type="text"
+                />
                 <Button
-                    fullWidth
+                    size="small"
+                    type="submit"
                     variant="contained"
                 >
-                    Create New Encounter
+                    Create Encounter
                 </Button>
-            </Link>
+            </ListItem>
+            </List>
         </Container>
     )
 }
