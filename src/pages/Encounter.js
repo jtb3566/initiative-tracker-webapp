@@ -1,14 +1,14 @@
-import { Container, Box, Typography, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Autocomplete, TextField, Button, Select, MenuItem } from "@mui/material";
+import { Container, Box, Typography, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Autocomplete, TextField, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 
 import fetchCharacters from '../utilities/fetchCharacters'
+import addCharacterToEncounter from '../utilities/addCharacterToEncounter'
 
 export default function Encounter() {
     const { state } = useLocation();
     const[encounter, setEncounter] = useState(state)
     const[characters, setCharacters] = useState([]);
-    
     useEffect(() => {
         const retrieveCharacters = async () => {
             const fetchedCharacters = await fetchCharacters();
@@ -16,6 +16,17 @@ export default function Encounter() {
         }
         retrieveCharacters();
     }, [])
+
+    let selectedCharacter;
+    const handleChange = (event, value) => {
+        selectedCharacter=value;
+    }
+
+    const handleClick = async (event) => {
+        event.preventDefault();
+        const encounterWithAddedCharacter = await addCharacterToEncounter(selectedCharacter, encounter);
+        setEncounter(encounterWithAddedCharacter);
+    }
 
     return (
         <Container component = "main" maxWidth="sm">
@@ -30,7 +41,6 @@ export default function Encounter() {
                 <Typography component="h1">
                     {encounter.name}
                 </Typography>
-            
             </Box>
             <TableContainer component="main">
                 <Table size="small" aria-label="a dense table"> 
@@ -57,8 +67,8 @@ export default function Encounter() {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Box component="form">
                 <Autocomplete
+                    onChange={handleChange}
                     size="small"
                     disablePortal
                     id="newCharacter"
@@ -68,14 +78,13 @@ export default function Encounter() {
                     sx={{ width: 300 }}
                     renderInput={(params) => <TextField {...params} label="Character" />}
                 />
-                <Button 
+                <Button onClick={handleClick}
                     variant="contained"
                     type="submit"
                     size="small"
                 >
                     Add Character
                 </Button>  
-            </Box>
         </Container>
     )
 }
