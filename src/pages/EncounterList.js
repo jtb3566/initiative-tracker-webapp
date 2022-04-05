@@ -34,7 +34,7 @@ export default function EncounterList() {
         }
     }
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const handleRedirect = (encounter) => {
         navigate('/Encounter', {state: encounter})
     }

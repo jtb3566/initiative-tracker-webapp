@@ -1,6 +1,6 @@
 import { Container, Box, Typography, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Autocomplete, TextField, Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import fetchCharacters from '../utilities/fetchCharacters'
 import addCharacterToEncounter from '../utilities/addCharacterToEncounter'
@@ -26,6 +26,11 @@ export default function Encounter() {
         event.preventDefault();
         const encounterWithAddedCharacter = await addCharacterToEncounter(selectedCharacter, encounter);
         setEncounter(encounterWithAddedCharacter);
+    }
+
+    const navigate = useNavigate();
+    const handleRedirect = () => {
+        navigate('/InitiativeTracker', {state: encounter})
     }
 
     return (
@@ -67,24 +72,32 @@ export default function Encounter() {
                     </TableBody>
                 </Table>
             </TableContainer>
-                <Autocomplete
-                    onChange={handleChange}
-                    size="small"
-                    disablePortal
-                    id="newCharacter"
-                    options={characters}
-                    getOptionLabel={option => option.name}
-                    isOptionEqualToValue={(option, value) => option.id === value.id}
-                    sx={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Character" />}
-                />
-                <Button onClick={handleClick}
-                    variant="contained"
-                    type="submit"
-                    size="small"
-                >
-                    Add Character
-                </Button>  
+            <Autocomplete
+                onChange={handleChange}
+                size="small"
+                disablePortal
+                id="newCharacter"
+                options={characters}
+                getOptionLabel={option => option.name}
+                isOptionEqualToValue={(option, value) => option.id === value.id}
+                sx={{ width: 300 }}
+                renderInput={(params) => <TextField {...params} label="Character" />}
+            />
+            <Button onClick={handleClick}
+                variant="contained"
+                type="submit"
+                size="small"
+            >
+                Add Character
+            </Button>
+            <hr></hr>
+            <Button
+                onClick={handleRedirect} 
+                variant="contained"
+                fullWidth
+            >
+                Roll for Initiative!
+            </Button>  
         </Container>
     )
 }
