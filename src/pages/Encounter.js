@@ -1,10 +1,22 @@
-import { Container, Box, Typography, TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from "@mui/material";
+import { Container, Box, Typography, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Autocomplete, TextField, Button, Select, MenuItem } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
+
+import fetchCharacters from '../utilities/fetchCharacters'
 
 export default function Encounter() {
     const { state } = useLocation();
     const[encounter, setEncounter] = useState(state)
+    const[characters, setCharacters] = useState([]);
+    
+    useEffect(() => {
+        const retrieveCharacters = async () => {
+            const fetchedCharacters = await fetchCharacters();
+            setCharacters(fetchedCharacters);
+        }
+        retrieveCharacters();
+    }, [])
+
     return (
         <Container component = "main" maxWidth="sm">
             <Box
@@ -45,6 +57,25 @@ export default function Encounter() {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Box component="form">
+                <Autocomplete
+                    size="small"
+                    disablePortal
+                    id="newCharacter"
+                    options={characters}
+                    getOptionLabel={option => option.name}
+                    isOptionEqualToValue={(option, value) => option.id === value.id}
+                    sx={{ width: 300 }}
+                    renderInput={(params) => <TextField {...params} label="Character" />}
+                />
+                <Button 
+                    variant="contained"
+                    type="submit"
+                    size="small"
+                >
+                    Add Character
+                </Button>  
+            </Box>
         </Container>
     )
 }
