@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import fetchCharacters from '../utilities/fetchCharacters'
 import addCharacterToEncounter from '../utilities/addCharacterToEncounter'
+import rollInitiative from "../utilities/rollInitiative";
 
 export default function Encounter() {
     const { state } = useLocation();
@@ -30,7 +31,9 @@ export default function Encounter() {
 
     const navigate = useNavigate();
     const handleRedirect = () => {
-        navigate('/InitiativeTracker', {state: encounter})
+        const passedEncounter = encounter;
+        passedEncounter.participants = rollInitiative(passedEncounter.characters);
+        navigate('/InitiativeTracker', {state: passedEncounter})
     }
 
     return (
