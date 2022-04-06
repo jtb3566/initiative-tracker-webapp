@@ -20,10 +20,19 @@ export default function Characters() {
         const character = {
             name: event.currentTarget.name.value,
             initiativeMod: event.currentTarget.initiativeMod.value,
-            armorClass: event.currentTarget.armorClass.value,
+            armorClass: event.currentTarget.armorClass.value
         }
-        const created = await createCharacter(character);
-        setCharacters([...characters, created])
+
+        console.log(characters.map(c => c.name).includes(character.name))
+
+        if (characters.map(c => c.name).includes(character.name) ) {
+            alert("Please enter a unique character name")
+            
+        } else {
+            const created = await createCharacter(character);
+            setCharacters([...characters, created])
+        }
+        
     }
 
     const handleDelete = async (character) => {

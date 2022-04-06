@@ -5,6 +5,7 @@ import EncounterList from './pages/EncounterList';
 import Encounter from './pages/Encounter'
 import NavBar from './pages/NavBar';
 import IniativeTracker from './pages/InitiativeTracker';
+import Footer from './pages/Footer';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/InitiativeTracker" element={<IniativeTracker />} />
       </Routes>
     </Router>
+    <Footer />
     </div>
   );
 }
