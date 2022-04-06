@@ -18,6 +18,8 @@ export default function Encounter() {
     const[characters, setCharacters] = useState([]);
     const[allMonsters, setAllMonsters] = useState([])
     const[monsters, setMonsters] = useState([])
+    const[selectedMonster, setSelectedMonster] = useState();
+
 
     useEffect(() => {
         const retrieveCharacters = async () => {
@@ -50,9 +52,8 @@ export default function Encounter() {
         selectedCharacter=value;
     }
 
-    let selectedMonster;
     const handleMonsterChange = (event, value) => {
-        selectedMonster = value;
+        setSelectedMonster(value);
     }
 
     const handleClick = async (event) => {
