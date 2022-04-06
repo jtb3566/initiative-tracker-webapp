@@ -18,9 +18,9 @@ export default function IniativeTracker() {
 
     const tableBody = encounter.participants ? (
         <TableBody>
-            {encounter.participants.map((participant) => (
+            {encounter.participants.map((participant, index) => (
                 <TableRow
-                    key={participant.id}
+                    key={index}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                     <TableCell component="th" scope="row">

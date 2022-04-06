@@ -1,7 +1,7 @@
 import { Box, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Autocomplete, TextField, Button } from "@mui/material";
 
 export default function EncounterTable (props) {
-    const { handleDelete, handleClick, handleChange, handleMonsterChange, allMonsters, handleMonsterClick, characterOptions } = {...props}
+    const { handleDelete, handleClick, handleChange, handleMonsterChange, allMonsters, handleMonsterClick, characterOptions, monsters, characters, handleMonsterDelete } = {...props}
     return (
         <TableContainer component="main">
                 <Table size="small" aria-label="a dense table"> 
@@ -14,7 +14,7 @@ export default function EncounterTable (props) {
                         </TableRow>   
                     </TableHead>
                     <TableBody>
-                        {props.characters.map((character) => (
+                        {characters.map((character) => (
                             <TableRow
                             key={character.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -44,7 +44,7 @@ export default function EncounterTable (props) {
                                 </TableCell>
                             </TableRow>
                         ))}
-                        {props.monsters.map((monster, index) => (
+                        {monsters.map((monster, index) => (
                             <TableRow
                             key={index}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -55,11 +55,11 @@ export default function EncounterTable (props) {
                                 <TableCell align="right">{monster.armorClass}</TableCell>
                                 <TableCell align="right">{monster.initiativeMod}</TableCell>
                                 <TableCell>
-                                    <Box component="form" onSubmit={handleDelete}>
+                                    <Box component="form" onSubmit={handleMonsterDelete}>
                                     <input
                                         type="hidden"
-                                        name="monsterName"
-                                        value={monster.name}
+                                        name="index"
+                                        value={index}
                                     >
                                     </input>
                                     <Button

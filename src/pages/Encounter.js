@@ -10,6 +10,7 @@ import fetchAllMonsters from "../utilities/fetchAllMonsters";
 import fetchMonsterByUrl from "../utilities/fetchMonsterByUrl";
 import addMonsterToEncounter from "../utilities/addMonsterToEncounter";
 import EncounterTable from "./EncounterTable";
+import deleteMonsterFromEncounter from "../utilities/deleteMonsterFromEncounter";
 
 export default function Encounter() {
     const { state } = useLocation();
@@ -39,7 +40,6 @@ export default function Encounter() {
             const monsterUrls = encounter.monsters.split(",")
             monsterUrls.shift()
             const fetchedMonsters = await fetchMonsterByUrl(monsterUrls)
-            console.log(fetchedMonsters)
             setMonsters(fetchedMonsters)
         }
          retrieveMonsters();
@@ -57,8 +57,13 @@ export default function Encounter() {
 
     const handleClick = async (event) => {
         event.preventDefault();
-        const encounterWithAddedCharacter = await addCharacterToEncounter(selectedCharacter, encounter);
-        setEncounter(encounterWithAddedCharacter);
+        if (selectedCharacter === undefined) {
+            alert("Please select a character that has not already be added to the encounter")
+        } else {
+            const encounterWithAddedCharacter = await addCharacterToEncounter(selectedCharacter, encounter);
+            setEncounter(encounterWithAddedCharacter);
+        }
+        
     }
 
     const handleMonsterClick = async (event) => {
@@ -77,6 +82,12 @@ export default function Encounter() {
     const handleDelete = async (event) => {
         event.preventDefault();
         const updatedEncounter = await deleteCharacterFromEncounter(event.currentTarget.characterId.value, encounter)
+        setEncounter(updatedEncounter)
+    }
+
+    const handleMonsterDelete = async (event) => {
+        event.preventDefault();
+        const updatedEncounter = await deleteMonsterFromEncounter(event.currentTarget.index.value, encounter)
         setEncounter(updatedEncounter)
     }
 
@@ -107,6 +118,7 @@ export default function Encounter() {
                 handleMonsterChange={handleMonsterChange}
                 allMonsters = {allMonsters}
                 handleMonsterClick={handleMonsterClick}
+                handleMonsterDelete={handleMonsterDelete}
             />
             <hr></hr>
             <Button
