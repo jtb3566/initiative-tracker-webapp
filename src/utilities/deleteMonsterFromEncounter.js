@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const deleteMonsterFromEncounter = async (index, encounter) => {
-    const deleteIndex = index + 1
+    const deleteIndex = Number(index) + 1
     const urlsArr = encounter.monsters.split(",")
     const newUrlsArr = urlsArr.filter((u, index) => {
         if (index !== deleteIndex) {
