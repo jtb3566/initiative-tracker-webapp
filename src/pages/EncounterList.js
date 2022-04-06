@@ -66,7 +66,7 @@ export default function EncounterList() {
             </Box>
             <List>
                 {listEncounters}
-                <ListItem component="form" onSubmit={handleSubmit} > 
+                <ListItem component="form" onSubmit={handleSubmit}> 
                 <TextField
                     size="small"
                     margin="normal"
@@ -76,6 +76,7 @@ export default function EncounterList() {
                     name="name"
                     type="text"
                 />
+                <hr></hr>
                 <Button
                     size="small"
                     type="submit"

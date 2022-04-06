@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Box, Typography, List, ListItem, ListItemText, ListItemButton, Button, TextField } from "@mui/material";
+import { Container, Box, Typography, List, ListItem, ListItemText, Button, TextField } from "@mui/material";
 
 import fetchCharacters from "../utilities/fetchCharacters"
 import deleteCharacter from "../utilities/deleteCharacter"
@@ -89,11 +89,10 @@ export default function Characters() {
                     type="number"
                 />
                 <Button
-                    size="small"
                     type="submit"
                     variant="contained"
                 >
-                    Create Character
+                    Create
                 </Button>  
             </ListItem>
             </List>
