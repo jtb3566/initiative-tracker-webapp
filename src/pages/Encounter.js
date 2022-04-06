@@ -87,6 +87,7 @@ export default function Encounter() {
 
     const handleMonsterDelete = async (event) => {
         event.preventDefault();
+        console.log("I clicked delete")
         const updatedEncounter = await deleteMonsterFromEncounter(event.currentTarget.index.value, encounter)
         setEncounter(updatedEncounter)
     }

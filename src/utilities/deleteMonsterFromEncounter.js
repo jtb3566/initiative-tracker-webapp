@@ -1,9 +1,14 @@
 import axios from "axios";
 
 const deleteMonsterFromEncounter = async (index, encounter) => {
+    const deleteIndex = index + 1
     const urlsArr = encounter.monsters.split(",")
-    urlsArr.splice(index+1, 1) // adding one because of the empty index we remove for monsters
-    encounter.monsters = urlsArr.join(",")
+    const newUrlsArr = urlsArr.filter((u, index) => {
+        if (index !== deleteIndex) {
+            return u
+        }
+     })
+    encounter.monsters = newUrlsArr.join(",")
     return await (await axios.post('http://localhost:8080/api/encounter/deleteMonster', encounter)).data
 }
 
