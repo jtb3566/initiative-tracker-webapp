@@ -4,7 +4,7 @@ import { Typography } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import axios from "axios";
-import fetchAccountByEmail from "../utilities/fetchAccountByEmail";
+import fetchAccountByEmail from "../../utilities/fetchAccountByEmail";
 
 export default function CreateAccount() {
 

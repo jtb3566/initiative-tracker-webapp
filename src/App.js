@@ -1,11 +1,10 @@
 import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom'
-import CreateAccount from './pages/CreateAccount';
-import Characters from './pages/Characters';
-import EncounterList from './pages/EncounterList';
-import Encounter from './pages/Encounter'
-import NavBar from './pages/NavBar';
-import IniativeTracker from './pages/InitiativeTracker';
-import Footer from './pages/Footer';
+import Characters from './components/pages/Characters';
+import EncounterList from './components/pages/EncounterList';
+import Encounter from './components/pages/Encounter'
+import NavBar from './components/NavBar';
+import IniativeTracker from './components/pages/InitiativeTracker';
+import Footer from './components/Footer'
 
 
 function App() {
@@ -15,7 +14,6 @@ function App() {
       <NavBar />
       <Routes>
         <Route exact path="/" element={<EncounterList />} />
-        <Route exact path="/createAccount" element={<CreateAccount />} />
         <Route exact path="/Characters" element={<Characters />} />
         <Route exact path="/encounter" element={<Encounter />} />
         <Route exact path="/InitiativeTracker" element={<IniativeTracker />} />

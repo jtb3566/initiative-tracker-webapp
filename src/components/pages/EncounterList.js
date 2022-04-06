@@ -2,9 +2,9 @@ import { Container, Box, Typography, List, ListItem, ListItemButton, Button, Tex
 import { useEffect, useState } from "react";
 import { useNavigate  } from "react-router-dom";
 
-import fetchEncounters from "../utilities/fetchEncounters";
-import deleteEncounter from "../utilities/deleteEncounter";
-import createEncounter from "../utilities/createEncounter";
+import fetchEncounters from "../../utilities/db_api_utilities/fetchEncounters";
+import deleteEncounter from "../../utilities/db_api_utilities/deleteEncounter";
+import createEncounter from "../../utilities/db_api_utilities/createEncounter";
 
 export default function EncounterList() {
     const [encounters, setEncounters] = useState([]) 

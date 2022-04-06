@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Container, Box, Typography, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TextField, Button } from "@mui/material";
-import sortParticipants from "../utilities/sortParticipants";
+import sortParticipants from "../../utilities/sortParticipants";
 
 export default function IniativeTracker() {
     const { state } = useLocation();

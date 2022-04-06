@@ -2,15 +2,15 @@ import { Container, Box, Typography, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import fetchCharacters from '../utilities/fetchCharacters'
-import addCharacterToEncounter from '../utilities/addCharacterToEncounter'
-import rollInitiative from "../utilities/rollInitiative";
-import deleteCharacterFromEncounter from "../utilities/deleteCharacterFromEncounter";
-import fetchAllMonsters from "../utilities/fetchAllMonsters";
-import fetchMonsterByUrl from "../utilities/fetchMonsterByUrl";
-import addMonsterToEncounter from "../utilities/addMonsterToEncounter";
-import EncounterTable from "./EncounterTable";
-import deleteMonsterFromEncounter from "../utilities/deleteMonsterFromEncounter";
+import fetchCharacters from '../../utilities/db_api_utilities/fetchCharacters'
+import addCharacterToEncounter from '../../utilities/db_api_utilities/addCharacterToEncounter'
+import rollInitiative from "../../utilities/rollInitiative";
+import deleteCharacterFromEncounter from "../../utilities/db_api_utilities/deleteCharacterFromEncounter";
+import fetchAllMonsters from "../../utilities/5e_api_utilities/fetchAllMonsters";
+import fetchMonsterByUrl from "../../utilities/5e_api_utilities/fetchMonsterByUrl";
+import addMonsterToEncounter from "../../utilities/db_api_utilities/addMonsterToEncounter";
+import EncounterTable from "../page_elements/EncounterTable";
+import deleteMonsterFromEncounter from "../../utilities/db_api_utilities/deleteMonsterFromEncounter";
 
 export default function Encounter() {
     const { state } = useLocation();

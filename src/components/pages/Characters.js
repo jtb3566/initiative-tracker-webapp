@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Container, Box, Typography, List, ListItem, ListItemText, Button, TextField } from "@mui/material";
 
-import fetchCharacters from "../utilities/fetchCharacters"
-import deleteCharacter from "../utilities/deleteCharacter"
-import createCharacter from "../utilities/createCharacter";
+import fetchCharacters from "../../utilities/db_api_utilities/fetchCharacters"
+import deleteCharacter from "../../utilities/db_api_utilities/deleteCharacter"
+import createCharacter from "../../utilities/db_api_utilities/createCharacter";
 
 export default function Characters() {
     const [characters, setCharacters] = useState([])
