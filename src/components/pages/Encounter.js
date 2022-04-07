@@ -45,7 +45,7 @@ export default function Encounter () {
     retrieveMonsters()
   }, [encounter.monsters])
 
-  const handleChange = (event, value) => {
+  const handleCharacterChange = (event, value) => {
     setSelectedCharacter(value)
   }
 
@@ -53,7 +53,7 @@ export default function Encounter () {
     setSelectedMonster(value)
   }
 
-  const handleClick = async (event) => {
+  const handleCharacterAdd = async (event) => {
     event.preventDefault()
     if (selectedCharacter === undefined) {
       alert('Please select a character that has not already be added to the encounter')
@@ -64,7 +64,7 @@ export default function Encounter () {
     }
   }
 
-  const handleMonsterClick = async (event) => {
+  const handleMonsterAdd = async (event) => {
     event.preventDefault()
     const encounterWithAddedMonster = await addMonsterToEncounter(selectedMonster.url, encounter)
     setEncounter(encounterWithAddedMonster)
@@ -77,7 +77,7 @@ export default function Encounter () {
     navigate('/InitiativeTracker', { state: passedEncounter })
   }
 
-  const handleDelete = async (event) => {
+  const handleCharacterDelete = async (event) => {
     event.preventDefault()
     const updatedEncounter = await deleteCharacterFromEncounter(event.currentTarget.characterId.value, encounter)
     setEncounter(updatedEncounter)
@@ -109,13 +109,13 @@ export default function Encounter () {
             <EncounterTable
                 characters={encounter.characters}
                 monsters={monsters}
-                handleDelete={handleDelete}
-                handleChange={handleChange}
+                handleDelete={handleCharacterDelete}
+                handleChange={handleCharacterChange}
                 characterOptions={characterOptions}
-                handleClick = {handleClick}
+                handleClick = {handleCharacterAdd}
                 handleMonsterChange={handleMonsterChange}
                 allMonsters = {allMonsters}
-                handleMonsterClick={handleMonsterClick}
+                handleMonsterClick={handleMonsterAdd}
                 handleMonsterDelete={handleMonsterDelete}
             />
             <hr></hr>

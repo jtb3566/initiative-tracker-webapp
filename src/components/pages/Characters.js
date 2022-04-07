@@ -23,8 +23,6 @@ export default function Characters () {
       armorClass: event.currentTarget.armorClass.value
     }
 
-    console.log(characters.map(c => c.name).includes(character.name))
-
     if (characters.map(c => c.name).includes(character.name)) {
       alert('Please enter a unique character name')
     } else {

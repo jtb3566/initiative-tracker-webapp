@@ -8,6 +8,7 @@ import createEncounter from '../../utilities/db_api_utilities/createEncounter'
 
 export default function EncounterList () {
   const [encounters, setEncounters] = useState([])
+
   useEffect(() => {
     const retrieveEncounters = async () => {
       const fetchedEncounters = await fetchEncounters()
