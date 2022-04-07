@@ -1,17 +1,18 @@
-import { Box, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Autocomplete, TextField, Button } from "@mui/material";
+import { Box, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Autocomplete, TextField, Button } from '@mui/material'
+import React from 'react'
 
 export default function EncounterTable (props) {
-    const { handleDelete, handleClick, handleChange, handleMonsterChange, allMonsters, handleMonsterClick, characterOptions, monsters, characters, handleMonsterDelete } = {...props}
-    return (
+  const { handleDelete, handleClick, handleChange, handleMonsterChange, allMonsters, handleMonsterClick, characterOptions, monsters, characters, handleMonsterDelete } = { ...props }
+  return (
         <TableContainer component="main">
-                <Table size="small" aria-label="a dense table"> 
+                <Table size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Name</TableCell>
                             <TableCell align="right">AC</TableCell>
                             <TableCell align="right">Initiative Mod</TableCell>
                             <TableCell align="right"></TableCell>
-                        </TableRow>   
+                        </TableRow>
                     </TableHead>
                     <TableBody>
                         {characters.map((character) => (
@@ -86,7 +87,7 @@ export default function EncounterTable (props) {
                                     isOptionEqualToValue={(option, value) => option.id === value.id}
                                     sx={{ width: 300 }}
                                     renderInput={(params) => <TextField {...params} label="Character" />}
-                                />  
+                                />
                             </TableCell>
                             <TableCell>
                                 <Button onClick={handleClick}
@@ -110,7 +111,7 @@ export default function EncounterTable (props) {
                                     isOptionEqualToValue={(option, value) => option.index === value.index}
                                     sx={{ width: 300 }}
                                     renderInput={(params) => <TextField {...params} label="Monsters" />}
-                                />  
+                                />
                             </TableCell>
                             <TableCell>
                                 <Button onClick={handleMonsterClick}
@@ -125,6 +126,5 @@ export default function EncounterTable (props) {
                     </TableBody>
                 </Table>
             </TableContainer>
-    )
-
+  )
 }

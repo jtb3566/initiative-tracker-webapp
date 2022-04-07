@@ -1,22 +1,23 @@
-import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Container, Box, Typography, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TextField, Button } from "@mui/material";
-import sortParticipants from "../../utilities/sortParticipants";
+import { useLocation } from 'react-router-dom'
+import { useState, React } from 'react'
+import { Container, Box, Typography, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TextField, Button } from '@mui/material'
+import sortParticipants from '../../utilities/sortParticipants'
 
-export default function IniativeTracker() {
-    const { state } = useLocation();
-    const [encounter, setEncounter] = useState(state);
+export default function IniativeTracker () {
+  const { state } = useLocation()
+  const [encounter, setEncounter] = useState(state)
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const updatedEncounter = {...encounter}
-        const participantIndex = updatedEncounter.participants.map(p => p.id).indexOf(Number(event.currentTarget.participantId.value))
-        updatedEncounter.participants[participantIndex].initiative = event.currentTarget.initiative.value
-        updatedEncounter.participants=sortParticipants(updatedEncounter.participants)
-        setEncounter(updatedEncounter);
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const updatedEncounter = { ...encounter }
+    const participantIndex = updatedEncounter.participants.map(p => p.id).indexOf(Number(event.currentTarget.participantId.value))
+    updatedEncounter.participants[participantIndex].initiative = event.currentTarget.initiative.value
+    updatedEncounter.participants = sortParticipants(updatedEncounter.participants)
+    setEncounter(updatedEncounter)
+  }
 
-    const tableBody = encounter.participants ? (
+  const tableBody = encounter.participants
+    ? (
         <TableBody>
             {encounter.participants.map((participant, index) => (
                 <TableRow
@@ -52,28 +53,29 @@ export default function IniativeTracker() {
                                 variant="contained"
                             >
                                 Submit
-                            </Button>  
+                            </Button>
                         </Box>
                     </TableCell>
                 </TableRow>
             ))}
         </TableBody>
-    ) : (
+      )
+    : (
         <TableBody>
             <TableRow>
             <TableCell align="right">Loading...</TableCell>
             </TableRow>
         </TableBody>
-    )
+      )
 
-    return (
+  return (
         <Container component = "main" maxWidth="md">
             <Box
                 sx={{
-                    marginTop: 8,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
+                  marginTop: 8,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center'
                 }}
             >
                 <Typography component="h1">
@@ -81,7 +83,7 @@ export default function IniativeTracker() {
                 </Typography>
             </Box>
             <TableContainer component="main">
-                <Table size="small" aria-label="a dense table"> 
+                <Table size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Name</TableCell>
@@ -89,11 +91,11 @@ export default function IniativeTracker() {
                             <TableCell align="right">Initiative Mod</TableCell>
                             <TableCell align="right">Initiative</TableCell>
                             <TableCell align="right">Initiative Overide</TableCell>
-                        </TableRow>   
+                        </TableRow>
                     </TableHead>
                     {tableBody}
                 </Table>
             </TableContainer>
-        </Container>   
-    )
+        </Container>
+  )
 }
