@@ -1,15 +1,15 @@
-import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom'
-import Characters from './components/pages/Characters';
-import EncounterList from './components/pages/EncounterList';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Characters from './components/pages/Characters'
+import EncounterList from './components/pages/EncounterList'
 import Encounter from './components/pages/Encounter'
-import NavBar from './components/NavBar';
-import IniativeTracker from './components/pages/InitiativeTracker';
+import NavBar from './components/NavBar'
+import IniativeTracker from './components/pages/InitiativeTracker'
 import Footer from './components/Footer'
+import React from 'react'
 
-
-function App() {
+function App () {
   return (
-    <div> 
+    <div>
     <Router>
       <NavBar />
       <Routes>
@@ -21,7 +21,7 @@ function App() {
     </Router>
     <Footer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
