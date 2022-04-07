@@ -15,17 +15,18 @@ import deleteMonsterFromEncounter from '../../utilities/db_api_utilities/deleteM
 export default function Encounter () {
   const { state } = useLocation()
   const [encounter, setEncounter] = useState(state)
-  const [characters, setCharacters] = useState([])
+  const [allCharacters, setAllCharacters] = useState([])
   const [allMonsters, setAllMonsters] = useState([])
   const [monsters, setMonsters] = useState([])
   const [selectedMonster, setSelectedMonster] = useState()
+  const [selectedCharacter, setSelectedCharacter] = useState()
 
   useEffect(() => {
-    const retrieveCharacters = async () => {
+    const retrieveAllCharacters = async () => {
       const fetchedCharacters = await fetchCharacters()
-      setCharacters(fetchedCharacters)
+      setAllCharacters(fetchedCharacters)
     }
-    retrieveCharacters()
+    retrieveAllCharacters()
 
     const retrieveAllMonsters = async () => {
       const fetchedAllMonsters = await fetchAllMonsters()
@@ -37,16 +38,15 @@ export default function Encounter () {
   useEffect(() => {
     const retrieveMonsters = async () => {
       const monsterUrls = encounter.monsters.split(',')
-      monsterUrls.shift()
+      monsterUrls.shift() // necessary becuase the db initializes monsters with an empty string
       const fetchedMonsters = await fetchMonsterByUrl(monsterUrls)
       setMonsters(fetchedMonsters)
     }
     retrieveMonsters()
   }, [encounter.monsters])
 
-  let selectedCharacter
   const handleChange = (event, value) => {
-    selectedCharacter = value
+    setSelectedCharacter(value)
   }
 
   const handleMonsterChange = (event, value) => {
@@ -59,6 +59,7 @@ export default function Encounter () {
       alert('Please select a character that has not already be added to the encounter')
     } else {
       const encounterWithAddedCharacter = await addCharacterToEncounter(selectedCharacter, encounter)
+      setSelectedCharacter()
       setEncounter(encounterWithAddedCharacter)
     }
   }
@@ -89,7 +90,7 @@ export default function Encounter () {
     setEncounter(updatedEncounter)
   }
 
-  const characterOptions = characters.filter(c => !encounter.characters.map(c => c.id).includes(c.id))
+  const characterOptions = allCharacters.filter(c => !encounter.characters.map(c => c.id).includes(c.id))
 
   return (
         <Container component = "main" maxWidth="sm">
