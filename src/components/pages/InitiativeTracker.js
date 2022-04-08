@@ -6,14 +6,24 @@ import sortParticipants from '../../utilities/sortParticipants'
 export default function IniativeTracker () {
   const { state } = useLocation()
   const [encounter, setEncounter] = useState(state)
+  const [turn, setTurn] = useState(0)
 
   const handleSubmit = (event) => {
     event.preventDefault()
     const updatedEncounter = { ...encounter }
-    const participantIndex = updatedEncounter.participants.map(p => p.id).indexOf(Number(event.currentTarget.participantId.value))
+    const participantIndex = updatedEncounter.participants.map(p => p.participantId).indexOf((Number(event.currentTarget.participantId.value)))
     updatedEncounter.participants[participantIndex].initiative = event.currentTarget.initiative.value
     updatedEncounter.participants = sortParticipants(updatedEncounter.participants)
     setEncounter(updatedEncounter)
+  }
+
+  const turnStyling = (index) => (
+    (index === turn) ? { backgroundColor: 'primary.main', color: 'white' } : {}
+  )
+
+  const handleClick = () => {
+    const newTurn = (turn + 1) % encounter.participants.length
+    setTurn(newTurn)
   }
 
   const tableBody = encounter.participants
@@ -24,7 +34,7 @@ export default function IniativeTracker () {
                     key={index}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
-                    <TableCell component="th" scope="row">
+                    <TableCell component="th" scope="row" sx = {turnStyling(index)}>
                         {participant.name}
                     </TableCell>
                     <TableCell align="right">{participant.armorClass}</TableCell>
@@ -44,7 +54,7 @@ export default function IniativeTracker () {
                             <input
                             type="hidden"
                             name="participantId"
-                            value={participant.id}
+                            value={participant.participantId}
                             >
                             </input>
                             <Button
@@ -96,6 +106,12 @@ export default function IniativeTracker () {
                     {tableBody}
                 </Table>
             </TableContainer>
+            <Button
+                onClick={handleClick}
+                variant="contained"
+            >
+                Next Turn
+            </Button>
         </Container>
   )
 }
