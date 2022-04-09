@@ -6,15 +6,28 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import React from 'react'
+import fetchAccountByEmail from '../../utilities/db_api_utilities/fetchAccountByEmail'
+import bcrypt from 'bcryptjs'
 
-export default function Login () {
-  const handleSubmit = (event) => {
+export default function Login (props) {
+  const { setToken } = { ...props }
+  const handleSubmit = async (event) => {
     event.preventDefault()
     const formData = {
       email: event.currentTarget.email.value,
       password: event.currentTarget.password.value
     }
-    console.log(formData)
+    const account = await fetchAccountByEmail(formData.email)
+    if (!account) {
+      alert('No account exists for this e-mail')
+    } else {
+      const passwordMatches = bcrypt.compareSync(formData.password, account.passwordHash)
+      if (passwordMatches) {
+        setToken(account.id)
+      } else {
+        alert('Incorrect password')
+      }
+    }
   }
 
   return (
