@@ -76,7 +76,7 @@ export default function Encounter () {
     const participants = passedEncounter.characters.concat(monsters)
     participants.forEach((p, index) => { p.participantId = index })
     passedEncounter.participants = rollInitiative(passedEncounter.characters.concat(monsters))
-    navigate('/InitiativeTracker', { state: passedEncounter })
+    navigate('/initiative-tracker-webapp/InitiativeTracker', { state: passedEncounter })
   }
 
   const handleCharacterDelete = async (event) => {

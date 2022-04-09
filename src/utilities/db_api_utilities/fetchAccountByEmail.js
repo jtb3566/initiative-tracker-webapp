@@ -1,11 +1,7 @@
 import axios from 'axios'
 
-const fetchAccountByEmail = async (data) => {
-  const account = await axios.post('http://localhost:8080/api/getAccountByEmail', data)
-    .then(function (response) {
-      console.log(response)
-    })
-  return account
+const fetchAccountByEmail = async (email) => {
+  return await (await axios.post('http://localhost:8080/api/getAccountByEmail', email)).data
 }
 
 export default fetchAccountByEmail

@@ -15,10 +15,10 @@ export default function NavBar () {
                     Roll for Initiative...
                 </Typography>
                 <hr></hr>
-                <Button variant="contained" onClick={() => handleRedirect('/')}>
+                <Button variant="contained" onClick={() => handleRedirect('/initiative-tracker-webapp')}>
                     Encounters
                 </Button>
-                <Button variant="contained" onClick={() => handleRedirect('/characters')}>
+                <Button variant="contained" onClick={() => handleRedirect('/initiative-tracker-webapp/characters')}>
                     Characters
                 </Button>
             </Toolbar>

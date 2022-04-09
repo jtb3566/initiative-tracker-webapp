@@ -10,11 +10,11 @@ import React from 'react'
 export default function Login () {
   const handleSubmit = (event) => {
     event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
-      password: data.get('password')
-    })
+    const formData = {
+      email: event.currentTarget.email.value,
+      password: event.currentTarget.password.value
+    }
+    console.log(formData)
   }
 
   return (
@@ -61,7 +61,7 @@ export default function Login () {
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/createAccount" variant="body2">
+                <Link href="/initiative-tracker-webapp/createAccount" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

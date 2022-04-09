@@ -36,7 +36,7 @@ export default function EncounterList () {
 
   const navigate = useNavigate()
   const handleRedirect = (encounter) => {
-    navigate('/Encounter', { state: encounter })
+    navigate('/initiative-tracker-webapp/Encounter', { state: encounter })
   }
 
   const listEncounters = encounters.map((encounter) =>
