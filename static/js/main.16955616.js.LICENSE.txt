@@ -5,6 +5,12 @@ object-assign
 */
 
 /**
+ * @license bcrypt.js (c) 2013 Daniel Wirtz <dcode@dcode.io>
+ * Released under the Apache License, Version 2.0
+ * see: https://github.com/dcodeIO/bcrypt.js for details
+ */
+
+/**
  * React Router v6.2.2
  *
  * Copyright (c) Remix Software Inc.

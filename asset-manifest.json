@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/initiative-tracker-webapp/static/css/main.7444e648.css",
-    "main.js": "/initiative-tracker-webapp/static/js/main.826c1d30.js",
+    "main.js": "/initiative-tracker-webapp/static/js/main.16955616.js",
     "static/js/787.728aa0b9.chunk.js": "/initiative-tracker-webapp/static/js/787.728aa0b9.chunk.js",
     "static/media/roboto-all-500-normal.woff": "/initiative-tracker-webapp/static/media/roboto-all-500-normal.52cb737b682eb9661ee1.woff",
     "static/media/roboto-all-700-normal.woff": "/initiative-tracker-webapp/static/media/roboto-all-700-normal.ef6d1d09b20b877fee4e.woff",
@@ -37,11 +37,11 @@
     "static/media/roboto-greek-ext-700-normal.woff2": "/initiative-tracker-webapp/static/media/roboto-greek-ext-700-normal.9674bc0ae12c2551d9d1.woff2",
     "index.html": "/initiative-tracker-webapp/index.html",
     "main.7444e648.css.map": "/initiative-tracker-webapp/static/css/main.7444e648.css.map",
-    "main.826c1d30.js.map": "/initiative-tracker-webapp/static/js/main.826c1d30.js.map",
+    "main.16955616.js.map": "/initiative-tracker-webapp/static/js/main.16955616.js.map",
     "787.728aa0b9.chunk.js.map": "/initiative-tracker-webapp/static/js/787.728aa0b9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7444e648.css",
-    "static/js/main.826c1d30.js"
+    "static/js/main.16955616.js"
   ]
 }
