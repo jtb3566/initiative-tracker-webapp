@@ -1,24 +1,30 @@
 import { Container, Box, Typography, TextField, Button } from '@mui/material'
 import React from 'react'
 import axios from 'axios'
-import fetchAccountByEmail from '../../utilities/fetchAccountByEmail'
+import { useNavigate } from 'react-router-dom'
+import fetchAccountByEmail from '../../utilities/db_api_utilities/fetchAccountByEmail'
+import bcrypt from 'bcryptjs'
 
 export default function CreateAccount () {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate()
+  const handleSubmit = async (event) => {
     event.preventDefault()
-
-    const data = {
+    const formData = {
       email: event.currentTarget.email.value,
-      username: event.currentTarget.username.value,
-      password: event.currentTarget.password.value
+      displayName: event.currentTarget.displayName.value,
+      passwordHash: bcrypt.hashSync(event.currentTarget.password.value, bcrypt.genSaltSync())
     }
+    const existingAccount = await fetchAccountByEmail(formData.email)
+    if (existingAccount) {
+      alert('There is already an account under this e-mail')
+    } else {
+      axios.post('http://localhost:8080/api/createAccount', formData)
+        .then(function (response) {
+          console.log(response)
+        })
 
-    fetchAccountByEmail(event.currentTarget.email.value)
-
-    axios.post('http://localhost:8080/api/createAccount', data)
-      .then(function (response) {
-        console.log(response)
-      })
+      navigate('/initiative-tracker-webapp')
+    }
   }
 
   return (
@@ -49,9 +55,9 @@ export default function CreateAccount () {
                         margin="normal"
                         required
                         fullWidth
-                        id="username"
-                        label="Username"
-                        name="username"
+                        id="displayName"
+                        label="Display Name"
+                        name="displayName"
                     />
                     <TextField
                         margin="normal"

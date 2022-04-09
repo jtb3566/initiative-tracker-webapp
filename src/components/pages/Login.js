@@ -6,15 +6,28 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import React from 'react'
+import fetchAccountByEmail from '../../utilities/db_api_utilities/fetchAccountByEmail'
+import bcrypt from 'bcryptjs'
 
-export default function Login () {
-  const handleSubmit = (event) => {
+export default function Login (props) {
+  const { setToken } = { ...props }
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
-      password: data.get('password')
-    })
+    const formData = {
+      email: event.currentTarget.email.value,
+      password: event.currentTarget.password.value
+    }
+    const account = await fetchAccountByEmail(formData.email)
+    if (!account) {
+      alert('No account exists for this e-mail')
+    } else {
+      const passwordMatches = bcrypt.compareSync(formData.password, account.passwordHash)
+      if (passwordMatches) {
+        setToken(account.id)
+      } else {
+        alert('Incorrect password')
+      }
+    }
   }
 
   return (
@@ -61,7 +74,7 @@ export default function Login () {
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/createAccount" variant="body2">
+                <Link href="/initiative-tracker-webapp/createAccount" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

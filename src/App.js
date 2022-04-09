@@ -5,18 +5,36 @@ import Encounter from './components/pages/Encounter'
 import NavBar from './components/NavBar'
 import IniativeTracker from './components/pages/InitiativeTracker'
 import Footer from './components/Footer'
-import React from 'react'
+import { React, useState } from 'react'
+import Login from './components/pages/Login'
+import CreateAccount from './components/pages/CreateAccount'
 
 function App () {
+  const [token, setToken] = useState()
+
+  if (!token) {
+    return (
+      <div>
+        <Router>
+          <Routes>
+            <Route exact path="/initiative-tracker-webapp" element={<Login setToken={setToken} />} />
+            <Route exact path="/initiative-tracker-webapp/createAccount" element={<CreateAccount />} />
+          </Routes>
+        </Router>
+        <Footer />
+      </div>
+    )
+  }
+
   return (
     <div>
     <Router>
       <NavBar />
       <Routes>
-        <Route exact path="/" element={<EncounterList />} />
-        <Route exact path="/Characters" element={<Characters />} />
-        <Route exact path="/encounter" element={<Encounter />} />
-        <Route exact path="/InitiativeTracker" element={<IniativeTracker />} />
+        <Route exact path="/initiative-tracker-webapp" element={<EncounterList />} />
+        <Route exact path="/initiative-tracker-webapp/Characters" element={<Characters />} />
+        <Route exact path="/initiative-tracker-webapp/encounter" element={<Encounter />} />
+        <Route exact path="/initiative-tracker-webapp/InitiativeTracker" element={<IniativeTracker />} />
       </Routes>
     </Router>
     <Footer />
